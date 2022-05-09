@@ -1,32 +1,26 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <header-index></header-index>
     <router-view/>
+    <!-- 在home、search显示，在登陆、注册页面隐藏 -->
+    <footer-index v-show="$route.meta.show"></footer-index>
   </div>
 </template>
-
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import HeaderIndex from '@/components/header/index.vue'
+import FooterIndex from '@/components/footer/index.vue'
+export default {
+  name:"",
+  mounted(){
+    //执行vuex里面的函数，请求三级联动数据
+    this.$store.dispatch('getCategoryList')
+  },
+  components:{
+        HeaderIndex,
+        FooterIndex
     }
-  }
 }
+</script>
+<style lang="less">
+
 </style>
